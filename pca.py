@@ -6,7 +6,6 @@ class PCA:
     def fit(self,X_train):
         X_train = (X_train - np.mean(X_train, axis=0) )#/ X_train.std()
         COV = np.cov(X_train.T)
-
         vals, vecs = np.linalg.eigh(COV)
         valvec = list(zip(vals, vecs.T))
         valvec.sort(key=lambda x:abs(x[0]), reverse=True)
