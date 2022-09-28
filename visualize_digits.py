@@ -7,22 +7,17 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 
+X_train, y_train = load_digits(return_X_y=True)
 
-X_train = load_digits()['data']
-y_train = load_digits()['target']
-
-
-
+## CUSTOM PCA
 pca = PCA()
 pca.fit(X_train)
-
 
 x_lim_left = 0
 x_lim_right = 0
 y_lim_left = 0
 y_lim_right = 0
-z_lim_left = 0
-z_lim_right = 0
+
 fig = plt.figure()
 for x, label in tqdm(zip(X_train, y_train)):
     x_pos = np.dot(pca.components[0].T, x)
@@ -34,7 +29,11 @@ for x, label in tqdm(zip(X_train, y_train)):
     plt.text(x_pos, y_pos, str(label))
 plt.xlim([x_lim_left,x_lim_right])
 plt.ylim([y_lim_left,y_lim_right])
+plt.title("Custom PCA")
 plt.show(block=False)
+
+
+## SKLEARN PCA
 pca = PCA_sklearn(n_components=3)
 pca.fit(X_train)
 
@@ -50,5 +49,6 @@ for x, label in zip(X_train, y_train):
     plt.text(x_pos, y_pos, str(label))
 plt.xlim([x_lim_left,x_lim_right])
 plt.ylim([y_lim_left,y_lim_right])
+plt.title("Sklearn PCA")
 plt.show()
 
