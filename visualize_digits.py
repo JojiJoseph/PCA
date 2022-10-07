@@ -1,15 +1,15 @@
+import numpy as np
 from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA as PCA_sklearn
-from pca import PCA
-import numpy as np
-
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+
+from pca import PCA
 
 
 X_train, y_train = load_digits(return_X_y=True)
 
-## CUSTOM PCA
+# CUSTOM PCA
 pca = PCA()
 pca.fit(X_train)
 
@@ -27,13 +27,13 @@ for x, label in tqdm(zip(X_train, y_train)):
     y_lim_right = max(y_pos, y_lim_right)
     y_lim_left = min(y_pos, y_lim_left)
     plt.text(x_pos, y_pos, str(label))
-plt.xlim([x_lim_left,x_lim_right])
-plt.ylim([y_lim_left,y_lim_right])
+plt.xlim([x_lim_left, x_lim_right])
+plt.ylim([y_lim_left, y_lim_right])
 plt.title("Custom PCA")
 plt.show(block=False)
 
 
-## SKLEARN PCA
+# SKLEARN PCA
 pca = PCA_sklearn(n_components=3)
 pca.fit(X_train)
 
@@ -47,8 +47,7 @@ for x, label in zip(X_train, y_train):
     x_lim = max(x_lim, abs(x_pos))
     y_lim = max(y_lim, abs(y_pos))
     plt.text(x_pos, y_pos, str(label))
-plt.xlim([x_lim_left,x_lim_right])
-plt.ylim([y_lim_left,y_lim_right])
+plt.xlim([x_lim_left, x_lim_right])
+plt.ylim([y_lim_left, y_lim_right])
 plt.title("Sklearn PCA")
 plt.show()
-
